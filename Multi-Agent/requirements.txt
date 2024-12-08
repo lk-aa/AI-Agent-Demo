@@ -1,0 +1,12 @@
+langchain
+langchain_community
+langchain_openai
+faiss-cpu
+langgraph
+fastapi
+sse_starlette
+streamlit
+bilibili-api-dev
+langserve
+zhipuai
+httpx-sse
