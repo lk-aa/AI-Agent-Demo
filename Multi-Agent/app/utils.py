@@ -57,7 +57,7 @@ def chat(state: GraphState):
 
     model_response = llm.invoke(messages)
     final_response = [AIMessage(content=model_response.content, name="chat")]   # 这里要添加名称
-    return {"input": input, "generation": model_response, "messages": final_response, "next": "NULL", "documents": state["documents"]}
+    return {"input": input, "generation": model_response.content, "messages": final_response, "next": "NULL", "documents": state["documents"]}
 
 
 def create_parser_components(llm):
