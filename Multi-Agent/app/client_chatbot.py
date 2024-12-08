@@ -13,7 +13,7 @@ config = {"configurable": {"thread_id": "1"}}
 # </h2>
 # """, unsafe_allow_html=True)
 
-ICON = Image.open("F:\\Learning\\人工智能-网络课程资料\\九天Hector-课程资料\\体验课\\Agent_Demo\\project\\Multi-Agent\\app\\icon.ico")
+ICON = Image.open(".\\icon.ico")
 st.set_page_config(
     page_title="Intelligent Multi-Agent ChatBot",
     layout="wide",
