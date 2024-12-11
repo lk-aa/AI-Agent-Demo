@@ -2,9 +2,12 @@ from langchain_openai import ChatOpenAI
 from bili_server.document_loader import DocumentLoader
 from bili_server.edges import EdgeGraph
 from bili_server.generate_chain import create_generate_chain
-from bili_server.graph import GraphState, Router
 from bili_server.grader import GraderUtils
 from bili_server.nodes import GraphNodes
+
+from arxiv_server.arxiv_node import ArxivNodes
+from config.graph import GraphState, Router
+
 
 from langgraph.graph import START, END, StateGraph
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
@@ -12,22 +15,31 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langgraph.checkpoint.memory import MemorySaver
 
 llm = ChatOpenAI(model="gpt-3.5-turbo")
-members = ["chat", "bili_analysis"]
+members = ["chat", "bili_analysis", "arxiv_retriever"]
 options = members + ["FINISH"]
 
 
 # 主Agent, 进行决策和选择字Agent
 def supervisor(state: GraphState):
     system_prompt = (
-        "You are a supervisor tasked with managing a conversation between the"
-        f" following workers: {members}.\n\n"
+        f"You are a supervisor tasked with managing and coordinating a conversation between the following workers: {members}.\n\n"
+    
         "Each worker has a specific role:\n"
-        "- chat: Responds directly to user inputs using natural language.\n"
-        "- bili_analysis: A video search agent for Bilibili website. If the user's question contains words such as 'Bilibili', then call this agent.\n"
-        "Given the following user request, respond with the worker to act next."
-        " Each worker will perform a task and respond with their results and status."
-        " When finished, respond with FINISH."
-        " When the last message is 'AIMessage', respond with FINISH."
+        """
+        - chat: Responds to user inputs using natural language. This worker handles general conversation, provides explanations, and clarifies user queries.\n
+        - bili_analysis: A video search agent for the Bilibili website. If the user's question mentions keywords such as 'Bilibili', 'video', or refers to specific video content, this worker will handle the task.\n
+        - arxiv_retriever: A research paper analysis agent for the arXiv website. If the user's question refers to research papers, academic topics, or mentions 'arXiv', this worker will be responsible for fetching and analyzing the relevant papers.\n
+        """
+        
+        """
+        As the supervisor, your job is to determine which worker is best suited to respond based on the user's question. \n
+            
+        Your response should ONLY include the name of the worker from the following list: 'chat', 'bili_analysis', 'arxiv_retriever'. Do not provide any other information. Once the worker completes their task, they will provide results, and you will continue coordinating.\n
+            
+        Once all tasks are completed and you have received the final responses from all relevant workers, respond with 'FINISH'. If the last message is from 'AIMessage', also respond with 'FINISH' to signal the end of the process.\n
+            
+        Your sole responsibility is to route the task to the appropriate worker and respond accordingly, only using the worker names.\n
+        """
     )
     messages = state["messages"]
     input = state["input"]
@@ -118,7 +130,8 @@ def create_workflow(api_key: str, model: str):
     workflow = StateGraph(GraphState)
 
     # 创建图节点的实例
-    graph_nodes = GraphNodes(llm, retriever, retrieval_grader, hallucination_grader, code_evaluator, question_rewriter)
+    bili_nodes = GraphNodes(llm, retriever, retrieval_grader, hallucination_grader, code_evaluator, question_rewriter)
+    arxiv_nodes = ArxivNodes(llm)
 
     # 创建边节点的实例
     edge_graph = EdgeGraph(hallucination_grader, code_evaluator)
@@ -126,17 +139,26 @@ def create_workflow(api_key: str, model: str):
     # 定义节点
     workflow.add_node("supervisor", supervisor)
 
-    workflow.add_node("bili_analysis", graph_nodes.retrieve)  # retrieve documents
-    workflow.add_node("grade_documents", graph_nodes.grade_documents)  # grade documents
-    workflow.add_node("generate", graph_nodes.generate)  # generate answers
-    workflow.add_node("transform_query", graph_nodes.transform_query)  # transform query
+    workflow.add_node("bili_analysis", bili_nodes.retrieve)  # retrieve documents
+    workflow.add_node("grade_documents", bili_nodes.grade_documents)  # grade documents
+    workflow.add_node("generate", bili_nodes.generate)  # generate answers
+    workflow.add_node("transform_query", bili_nodes.transform_query)  # transform query
+
+    workflow.add_node("arxiv_retriever", arxiv_nodes.Arxiv_retrieve)
+    workflow.add_node("arxiv_generate", arxiv_nodes.Arxiv_generate)
     workflow.add_node("chat", chat)
 
     # 创建图
     workflow.add_edge(START, "supervisor")
     # workflow.set_entry_point("supervisor")
     workflow.add_conditional_edges("supervisor",
-                                   lambda state: state["next"]
+                                   lambda state: state["next"],
+                                   # path_map={
+                                   #     "chat": "chat",
+                                   #     "bili_analysis": "bili_analysis",
+                                   #     "arxiv_analysis": "arxiv_retriever",
+                                   #     "FINISH": END
+                                   # }
                                    )
     workflow.add_edge("chat", "supervisor")
     workflow.add_edge("bili_analysis", "grade_documents")
@@ -158,6 +180,9 @@ def create_workflow(api_key: str, model: str):
             "not useful": "transform_query",
         }
     )
+
+    workflow.add_edge("arxiv_retriever", "arxiv_generate")
+    workflow.add_edge("arxiv_generate", "supervisor")
 
     # 编译图
     memory = MemorySaver()

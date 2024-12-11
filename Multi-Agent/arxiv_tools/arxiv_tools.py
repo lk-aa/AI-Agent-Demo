@@ -35,23 +35,23 @@ client = arxiv_tools.Client()
 async def search_articles(paper):
     paper_content = await fetch_content(paper)
     processed_data = {
-            "文章标题(title)": paper.title,  # 文章标题, The title of the article.
-            "文章的arxiv地址URL(id)": paper.entry_id.split('/')[-1],  # ID号, A url http://arxiv.org/abs/id
-            "论文第一版日期(published)": paper.published,  # 提交该论文第1版的日期, The date that version 1 of the article was submitted.
-            "论文出版最新日期(Published)": paper.updated.date(),
-            "文章摘要(summary)": paper.summary,  # 文章摘要, The article abstract.
-            "文章作者(author)": ", ".join(a.name for a in paper.authors),
-            # 每个作者一个。有包含作者姓名的子元素<name>, One for each author. Has child element <name> containing the author name.
-            "文章ID(entry_id)": paper.entry_id,  # 文章的ID
-            "与文章关联的网址(link)": paper.links,  # 最多可以有3个与本文关联的给定网址, Can be up to 3 given url's associated with this article.
-            "文章类别(category)": paper.categories,
-            # 文章的arXiv或ACM或MSC类别（如果有的话）, The arXiv or ACM or MSC category for an article if present.
-            "arxiv主要类别(arxiv_primary_category)": paper.primary_category,  # arXiv的主要类别, The primary arXiv category.
-            "作者评论(arxiv_comment)": paper.comment,  # 作者评论如果存在, The authors comment if present.
-            "期刊参考文献(arxiv_journal_ref)": paper.journal_ref,  # 期刊参考文献（如有）, A journal reference if present.
-            "已解析DOI到外部资源的url(arxiv_doi)": paper.doi,  # 已解析DOI到外部资源的url（如果存在）, A url for the resolved DOI to an external resource if present.
-            "文章PDF的URL地址(pdf_url)": paper.pdf_url,  # 文章PDF的URL地址
-            "文章内容(content)": paper_content
+        "文章标题(title)": paper.title,  # 文章标题, The title of the article.
+        "文章的arxiv地址URL(id)": paper.entry_id.split('/')[-1],  # ID号, A url http://arxiv.org/abs/id
+        "论文第一版日期(published)": paper.published,  # 提交该论文第1版的日期, The date that version 1 of the article was submitted.
+        "论文出版最新日期(Published)": paper.updated.date(),
+        "文章摘要(summary)": paper.summary,  # 文章摘要, The article abstract.
+        "文章作者(author)": ", ".join(a.name for a in paper.authors),
+        # 每个作者一个。有包含作者姓名的子元素<name>, One for each author. Has child element <name> containing the author name.
+        "文章ID(entry_id)": paper.entry_id,  # 文章的ID
+        "与文章关联的网址(link)": paper.links,  # 最多可以有3个与本文关联的给定网址, Can be up to 3 given url's associated with this article.
+        "文章类别(category)": paper.categories,
+        # 文章的arXiv或ACM或MSC类别（如果有的话）, The arXiv or ACM or MSC category for an article if present.
+        "arxiv主要类别(arxiv_primary_category)": paper.primary_category,  # arXiv的主要类别, The primary arXiv category.
+        "作者评论(arxiv_comment)": paper.comment,  # 作者评论如果存在, The authors comment if present.
+        "期刊参考文献(arxiv_journal_ref)": paper.journal_ref,  # 期刊参考文献（如有）, A journal reference if present.
+        "已解析DOI到外部资源的url(arxiv_doi)": paper.doi,  # 已解析DOI到外部资源的url（如果存在）, A url for the resolved DOI to an external resource if present.
+        "文章PDF的URL地址(pdf_url)": paper.pdf_url,  # 文章PDF的URL地址
+        "文章内容(content)": paper_content
     }
 
     # return json.dumps(processed_data, ensure_ascii=False)

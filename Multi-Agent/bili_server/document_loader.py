@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Author: MuyuCheney
-# Date: 2024-10-15
-
-
 from langchain_core.documents import Document
 from bilibili_tools import get_bilibi
 from typing import List, Optional
@@ -80,6 +74,7 @@ class DocumentLoader:
         retriever = vector_store.as_retriever(search_kwargs={"k": 6})
         retriever_result = retriever.invoke(str(keywords))
         print(f"检索到的数据为：{retriever_result}")
+        print(type(retriever_result))
         return retriever_result
 
 

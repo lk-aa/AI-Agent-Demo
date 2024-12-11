@@ -1,7 +1,7 @@
 from langchain_core.messages import AIMessage
 
 from bili_server.generate_chain import create_generate_chain
-from bili_server.graph import GraphState
+from config.graph import GraphState
 
 
 class GraphNodes:

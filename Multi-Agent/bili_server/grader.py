@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Author: MuyuCheney
-# Date: 2024-10-15
-
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 import os
@@ -84,14 +79,14 @@ class GraderUtils:
             A callable function that takes a generation (code), a question, and a list of documents as input and returns a JSON object with a binary score and feedback.
         """
         eval_template = PromptTemplate(
-            template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are a code evaluator assessing whether the generated code is correct and relevant to the given question.
+            template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are a content evaluator assessing whether the generated code is correct and relevant to the given question.
             Provide a JSON response with the following keys:
 
-            "score": A binary score "yes" or "no" indicating whether the code is correct and relevant. You must use the "..." not the '...'.
+            "score": A binary score "yes" or "no" indicating whether the content is correct and relevant. You must use the "..." not the '...'.
             "feedback": A brief explanation of your evaluation, including any issues or improvements needed.
 
             <|eot_id|><|start_header_id|>user<|end_header_id|>
-            Here is the generated code:
+            Here is the generated content:
             \n ------- \n
             {generation}
             \n ------- \n

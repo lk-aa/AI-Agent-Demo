@@ -14,9 +14,27 @@
 
 ## 5. Multi-Agent
 ### 5.1 Introduction
-  这是一个在BiliAgent基础上构建的多智能体。目前已完成原始框架的修改, 能够方便接入多个Agent。同时在BiliAgent基础上, 将它修改为一个对话式的Multi-Agent。后续需要增加：
-  - Arxiv网站论文抓取, 翻译和推荐。
-  - 消息的发送, 利用QQ邮箱等服务。
-  - 联网功能, 获取最新新闻和资讯。
+  这是一个在BiliAgent基础上构建的多智能体。目前已完成原始框架的修改, 能够方便接入多个Agent。同时在BiliAgent基础上, 将它修改为一个对话式的Multi-Agent。<br>
+  
+  **当前功能**：
+  - 对话式的聊天机器人;
+  - 调用Bili-API查询B站视频信息, 包括名称, 简介, 点赞数, 链接等信息, 然后通过多个Agent进行信息处理, 包括RAG, 内容审查等信息;
+  - 调用Arxiv-API查询Arxiv网站论文信息, 包括论文的摘要, 标题, 发表日期等信息, 然后通过Agent对信息进行理解和处理, 并给出用户合理的回答。
+  
+  **后续需要增加**：
+  - 消息的发送, 利用QQ邮箱等服务
+  - 联网功能, 获取最新新闻和资讯
+
 ### 5.2 FrameWork
-  Multi-Agent基于LangGraph, LangChain, LangServe 和 FastAPI.
+  **Multi-Agent基于技术**：LangGraph, LangChain, LangServe 和 FastAPI.<br>
+  **目前支持API**：OpenAI在线大模型API调用
+
+### 5.3 Project Show
+  <video width="60%" height="auto" controls>
+  <source src="./Multi-Agent/video/video.mp4" type="video/mp4">
+</video>
+
+### 5.4 Multi-Agent结构图
+  <img src="./Multi-Agent/app/supervisor.png" alt="图片1" width="60%">
+  <img src="./Multi-Agent/app/supervisor2.png" alt="图片2" width="60%">
+

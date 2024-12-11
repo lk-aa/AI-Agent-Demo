@@ -51,7 +51,10 @@ with st.spinner("🤔正在处理..."):
             for output in app.stream(input_all, config, stream_mode="values"):
                 responses.append(output)
 
+            print(responses)
+
             for response in responses[::-1]:
+                print(response)
                 if response.get("chat", []):
                     last_response = response.get("chat", [])["generation"]
                     print(last_response)
@@ -60,11 +63,14 @@ with st.spinner("🤔正在处理..."):
                 elif response.get("generate", []):
                     last_response = response.get("generate", [])["generation"]
                     break
+                elif response.get("arxiv_generate", []):
+                    last_response = response.get("arxiv_generate", [])["generation"]
+                    break
                 else:
                     last_response = "Please ask again."
 
             with st.chat_message("assistant"):
-                st.markdown(last_response)
+                st.write(last_response)
             # Add assistant response to chat history
             st.session_state.messages.append({"role": "assistant", "content": last_response})
 
@@ -75,4 +81,5 @@ with st.spinner("🤔正在处理..."):
         except Exception as e:
             st.error(f"处理时出现错误: {str(e)}")
 
-# test demo: 你好，我叫XXX。   请问我叫什么名字？    你能帮我在bilibili上推荐几个有关 LangGraph 的视频吗？
+# test demo: 你好，我叫XXX。   请问我叫什么名字？    你能帮我在bilibili上推荐几个有关 LangGraph 的视频吗？   请搜索几篇有关 KAN 的论文，并介绍每篇论文的摘要，最后给我论文的pdf地址。
+# 请帮我在bilibili上推荐几个有关 LangGraph 的视频，并介绍视频的主要内容，并把视频地址和点赞数量等信息整理给我。

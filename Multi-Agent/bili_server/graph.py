@@ -16,7 +16,7 @@ class GraphState(TypedDict):
 
     input: str
     generation: str
-    documents: str
+    documents: list
     next: str
     messages: Annotated[list[AnyMessage], operator.add]
 
