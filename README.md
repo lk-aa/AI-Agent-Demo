@@ -30,11 +30,14 @@
   **目前支持API**：OpenAI在线大模型API调用
 
 ### 5.3 Project Show
-  <video width="60%" height="auto" controls>
-  <source src="./Multi-Agent/video/video.mp4" type="video/mp4">
-</video>
+<div align="center">
+<img src="./Multi-Agent/video/video.gif" width="700" >
+</div>
 
 ### 5.4 Multi-Agent结构图
-  <img src="./Multi-Agent/app/supervisor.png" alt="图片1" width="60%">
-  <img src="./Multi-Agent/app/supervisor2.png" alt="图片2" width="60%">
-
+<div align="center">
+<img src="./Multi-Agent/app/supervisor.png" width="700" >
+</div>
+<div align="center">
+<img src="./Multi-Agent/app/supervisor2.png" width="700" >
+</div>
