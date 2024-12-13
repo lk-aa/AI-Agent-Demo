@@ -13,6 +13,7 @@
   一个Crewai框架构建的Multi-Agent, 能够完成互联网查询等功能，进行旅游策划。
 
 ## 5. Multi-Agent
+> <a href="./Multi-Agent/README.md"><strong>Multi-Agent项目详细信息</strong></a>
 ### 5.1 Introduction
   这是一个在BiliAgent基础上构建的多智能体。目前已完成原始框架的修改, 能够方便接入多个Agent。同时在BiliAgent基础上, 将它修改为一个对话式的Multi-Agent。<br>
   
@@ -31,13 +32,13 @@
 
 ### 5.3 Project Show
 <div align="center">
-<img src="./Multi-Agent/video/video.gif" width="700" >
+<img src="./Multi-Agent/assets/video.gif" width="700" >
 </div>
 
 ### 5.4 Multi-Agent结构图
 <div align="center">
-<img src="./Multi-Agent/app/supervisor.png" width="700" >
+<img src="./Multi-Agent/assets/supervisor.png" width="700" >
 </div>
 <div align="center">
-<img src="./Multi-Agent/app/supervisor2.png" width="700" >
+<img src="./Multi-Agent/assets/supervisor2.png" width="700" >
 </div>
