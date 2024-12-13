@@ -54,7 +54,7 @@ BiliBili热点 & 舆情实时分析智能体
 ## 6.安装指南
 ```bash
 # 克隆仓库
-git clone https://github.com/lk-aa/Multi-Agent-Project.git
+git clone https://github.com/lk-aa/AI-Agent-Demo.git
 
 # 安装依赖
 cd Multi-Agent
