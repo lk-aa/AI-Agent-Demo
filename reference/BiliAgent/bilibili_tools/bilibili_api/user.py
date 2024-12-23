@@ -9,7 +9,6 @@ import random
 import time
 from enum import Enum
 from typing import List, Union, Tuple
-from json.decoder import JSONDecodeError
 
 from .utils.utils import get_api, join, raise_for_statement
 from .utils.credential import Credential

@@ -45,7 +45,7 @@ if __name__ == '__main__':
     """
 
     # 将优惠政策写入文件
-    file_path = './store_promotions.txt'
+    file_path = 'store_promotions.txt'
     with open(file_path, 'w', encoding='utf-8') as file:
         file.write(promotions_content)
 

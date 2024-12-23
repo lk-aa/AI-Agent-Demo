@@ -5,7 +5,7 @@ bilibili_api.favorite_list
 """
 
 from enum import Enum
-from typing import List, Union, Optional
+from typing import List, Union
 
 from . import user
 from .video import Video

@@ -20,20 +20,17 @@ import webbrowser
 from typing import Dict, List, Union
 
 import rsa
-import httpx
 import urllib.parse
 import qrcode
 from yarl import URL
 
 from . import settings
-from .utils.sync import sync
 from .utils.utils import get_api
 from .utils.credential import Credential
 from .exceptions.LoginError import LoginError
 from .utils.network import to_form_urlencoded, Api
 from .utils.network import (
     HEADERS,
-    get_session,
     get_spi_buvid_sync,
     get_httpx_sync_session,
 )

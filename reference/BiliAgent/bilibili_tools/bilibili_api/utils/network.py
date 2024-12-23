@@ -5,8 +5,6 @@ bilibili_api.bili_server.network
 """
 
 import re
-import json
-import time
 import atexit
 import asyncio
 import hashlib
@@ -14,14 +12,13 @@ import hmac
 from functools import reduce
 from urllib.parse import urlencode
 from dataclasses import field, dataclass
-from typing import Any, Dict, Union, Coroutine, Type
+from typing import Any, Dict, Union, Coroutine
 from inspect import iscoroutinefunction as isAsync
 from urllib.parse import quote
 
 import httpx
 import aiohttp
 
-from .sync import sync
 from .. import settings
 from .utils import get_api
 from .credential import Credential

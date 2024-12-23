@@ -11,7 +11,6 @@ from typing import Tuple, Union
 from . import login
 from .utils.utils import get_api
 from .exceptions import LoginError
-import urllib.parse
 from .utils.picture import Picture
 from .utils.credential import Credential
 
