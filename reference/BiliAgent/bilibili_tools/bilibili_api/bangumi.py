@@ -20,8 +20,7 @@ from . import settings
 from .video import Video
 from .utils.utils import get_api, raise_for_statement
 from .utils.credential import Credential
-from .exceptions.ApiException import ApiException
-from .utils.network import Api, get_session, HEADERS
+from .utils.network import Api, get_session
 from .utils.initial_state import (
     get_initial_state,
     get_initial_state_sync,

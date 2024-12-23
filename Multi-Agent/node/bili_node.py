@@ -206,7 +206,7 @@ class BiliNodes:
         """
         re_write_prompt = PromptTemplate(
             template="""
-            You a question re-writer that converts an input question to a better version that is optimized for vectorstore retrieval. Look at the input and try to reason about the underlying sematic intent / meaning.
+            You a question re-writer that converts an input question to a better version that is optimized for vectorstore retrieval. Look at the input and reference to reason about the underlying sematic intent / meaning.
 
             Here is the initial question: {input}
 

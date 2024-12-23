@@ -9,7 +9,7 @@ def run():
     print("## Welcome to the Game Crew")
     print('-------------------------------')
 
-    with open('./config/gamedesign.yaml', 'r', encoding='utf-8') as file:
+    with open('config/gamedesign.yaml', 'r', encoding='utf-8') as file:
         examples = yaml.safe_load(file)
 
     inputs = {
@@ -29,7 +29,7 @@ def train():
     Train the crew for a given number of iterations.
     """
 
-    with open('./config/gamedesign.yaml', 'r', encoding='utf-8') as file:
+    with open('config/gamedesign.yaml', 'r', encoding='utf-8') as file:
         examples = yaml.safe_load(file)
 
     inputs = {

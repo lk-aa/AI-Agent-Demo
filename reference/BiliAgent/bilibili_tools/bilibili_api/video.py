@@ -29,7 +29,7 @@ from .utils.AsyncEvent import AsyncEvent
 from .utils.credential import Credential
 from .utils.BytesReader import BytesReader
 from .utils.danmaku import Danmaku, SpecialDanmaku
-from .utils.network import get_aiohttp_session, Api, get_session, get_mixin_key, enc_wbi
+from .utils.network import get_aiohttp_session, Api, get_session
 from .exceptions import (
     ArgsException,
     NetworkException,

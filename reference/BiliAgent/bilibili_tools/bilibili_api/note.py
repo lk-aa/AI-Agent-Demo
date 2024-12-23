@@ -4,14 +4,12 @@ bilibili_api.note
 笔记相关
 """
 
-import re
 import json
 from enum import Enum
 from html import unescape
 from typing import List, Union, overload
 
 import yaml
-import httpx
 from yarl import URL
 
 from .utils.initial_state import get_initial_state
@@ -20,7 +18,7 @@ from .utils.utils import get_api, raise_for_statement
 from .utils.picture import Picture
 from .utils.credential import Credential
 from .exceptions import ApiException, ArgsException
-from .utils.network import Api, get_session
+from .utils.network import Api
 from .video import get_cid_info_sync
 from . import article
 

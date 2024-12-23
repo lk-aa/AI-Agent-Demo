@@ -13,17 +13,13 @@ from enum import Enum
 from datetime import datetime
 from typing import Any, List, Tuple, Union, Optional
 
-import httpx
-
 from .user import name2uid_sync
 from .utils import utils
-from .utils.sync import sync
 from .utils.picture import Picture
-from . import user, vote, exceptions
+from . import user, vote
 from .utils.credential import Credential
 from .utils.network import Api
 from .utils import cache_pool
-from .exceptions.DynamicExceedImagesException import DynamicExceedImagesException
 from . import opus
 
 API = utils.get_api("dynamic")
