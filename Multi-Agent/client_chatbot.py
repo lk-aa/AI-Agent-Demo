@@ -6,7 +6,7 @@ from PIL import Image
 
 config = {"configurable": {"thread_id": "1"}}
 
-ICON = Image.open("assets/icon.ico")
+ICON = Image.open("../assets/icon.ico")
 st.set_page_config(
     page_title="Intelligent Multi-Agent ChatBot",
     layout="wide",
