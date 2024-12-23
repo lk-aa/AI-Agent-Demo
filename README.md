@@ -83,3 +83,7 @@ streamlit run ./client.py
 ```bash
 python workflow.py
 ```
+
+## 参考与实践
+
+在 `./reference` 目录中存放了我们项目开展过程中的参考项目与最小实践。
